@@ -1,6 +1,6 @@
 # flutter_to_native
 
-A new Flutter project.
+A sample flutter app with example implementation for flutter channel
 
 ## Getting Started
 
