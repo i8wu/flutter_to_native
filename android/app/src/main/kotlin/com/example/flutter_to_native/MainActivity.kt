@@ -16,7 +16,7 @@ class MainActivity: FlutterActivity() {
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
             call, result ->
             if (call.method == HELLO_METHOD) {
-                val greetings = helloFromNativeCode()
+                val greetings = helloFromNativeCode(call.argument("name"))
                 result.success(greetings)
             }
             else {
@@ -25,7 +25,7 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    fun helloFromNativeCode(): String {
-        return "Hello from native android"
+    fun helloFromNativeCode(name: String?): String {
+        return "Hello ${name}, from native android"
     }
 }

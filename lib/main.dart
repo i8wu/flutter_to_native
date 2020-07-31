@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _callNativeCode() async {
     String response = '';
     try {
-      final String result = await platform.invokeMethod('helloFromNativeCode');
+      final String result = await platform.invokeMethod('helloFromNativeCode', { 'name': 'ivan' });
       response = result;
     } on PlatformException catch (e) {
       response = 'Failed: ${e.message}';
