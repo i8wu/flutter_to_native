@@ -31,11 +31,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('flutter.native/helper');
   String _responseFromNativeCode = 'Waiting...';
+  String _name = '';
 
   Future<void> _callNativeCode() async {
     String response = '';
     try {
-      final String result = await platform.invokeMethod('helloFromNativeCode', { 'name': 'ivan' });
+      final String result = await platform.invokeMethod('helloFromNativeCode', { 'name': _name });
       response = result;
     } on PlatformException catch (e) {
       response = 'Failed: ${e.message}';
@@ -43,6 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       _responseFromNativeCode = response;
+    });
+  }
+
+  void _setName (text) {
+    setState(() {
+      _name = text;
     });
   }
 
@@ -57,7 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Click button to get response from native code:',
+              'Type name and click button to get response from native code:',
+            ),
+            TextField(
+              onChanged: _setName,
             ),
             Text(
               '$_responseFromNativeCode',
